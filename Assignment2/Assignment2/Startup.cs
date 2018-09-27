@@ -36,7 +36,7 @@ namespace Assignment2
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            var connection = @"Server=ehsesql1prd.cdu.edu.au;Database=tennis;User Id=test;Password=easypassword;ConnectRetryCount=0";
+            var connection = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=tennislocal;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             services.AddDbContext<tennisContext>(options => options.UseSqlServer(connection));
         }
 
@@ -49,7 +49,7 @@ namespace Assignment2
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler(" / Home/Error");
                 app.UseHsts();
             }
 

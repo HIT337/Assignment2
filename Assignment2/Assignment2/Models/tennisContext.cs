@@ -24,9 +24,11 @@ namespace Assignment2.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
+                var connection = @"Data Source=(localdb)\MSSQLLocalDB;Database=tennislocal;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=ehsesql1prd.cdu.edu.au;Database=tennis;User Id=test;Password=easypassword");
-            }
+                optionsBuilder.UseSqlServer(connection);
+            } 
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
