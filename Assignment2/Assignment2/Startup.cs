@@ -36,11 +36,8 @@ namespace Assignment2
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Connection=True;ConnectRetryCount=0";
+            var connection = @"Server=ehsesql1prd.cdu.edu.au;Database=tennis;User Id=test;Password=easypassword;ConnectRetryCount=0";
             services.AddDbContext<tennisContext>(options => options.UseSqlServer(connection));
-
-            services.AddDbContext<Assignment2Context>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("Assignment2Context")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -11,9 +11,9 @@ namespace Assignment2.Controllers
 {
     public class CoachesController : Controller
     {
-        private readonly Assignment2Context _context;
+        private readonly tennisContext _context;
 
-        public CoachesController(Assignment2Context context)
+        public CoachesController(tennisContext context)
         {
             _context = context;
         }
