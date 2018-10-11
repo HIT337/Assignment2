@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using assignment2.Data;
 
 namespace assignment2.Areas.Identity.Pages.Account
 {
@@ -20,19 +21,21 @@ namespace assignment2.Areas.Identity.Pages.Account
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
-
+        private ApplicationDbContext _context;
         private readonly RoleManager<ApplicationRole> _roleManager;
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender, RoleManager<ApplicationRole> roleManager)
+            IEmailSender emailSender, RoleManager<ApplicationRole> roleManager,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
             _roleManager = roleManager;
+            _context = context;
         }
 
         [BindProperty]
@@ -44,27 +47,15 @@ namespace assignment2.Areas.Identity.Pages.Account
         {
             [DataType(DataType.Text)]
             [StringLength(50, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
-            [Display(Name = "First Name")]
-            public string FirstName { get; set; }
+            [Display(Name = "Name")]
+            public string Name { get; set; }
 
             [Required]
             [DataType(DataType.Text)]
             [StringLength(50, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
-            [Display(Name = "Last Name")]
-            public string LastName { get; set; }
+            [Display(Name = "Nickname")]
+            public string Nickname { get; set; }
 
-            [DataType(DataType.Text)]
-            [MaxLength(50)]
-            public string City { get; set; }
-
-            [DataType(DataType.Text)]
-            [MaxLength(15)]
-            [Display(Name = "Postal Code")]
-            public string PostalCode { get; set; }
-
-            [DataType(DataType.Text)]
-            [MaxLength(35)]
-            public string Country { get; set; }
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
@@ -80,7 +71,6 @@ namespace assignment2.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
-
 
             [DataType(DataType.Text)]
             [Display(Name = "User Role")]
@@ -104,16 +94,26 @@ namespace assignment2.Areas.Identity.Pages.Account
                 {
                     await _userManager.AddPasswordAsync(user, Input.Password);
 
-                    if (Input.UserRole == "User")
+                    if (Input.UserRole == "Member")
                     {
 
-                        await _roleManager.CreateAsync(new ApplicationRole("User", "This is a User", DateTime.Now));
-                        await _userManager.AddToRoleAsync(user, "User");
+                        await _roleManager.CreateAsync(new ApplicationRole("Member", "This is a User", DateTime.Now));
+                        await _userManager.AddToRoleAsync(user, "Member");
                     }
                     else if (Input.UserRole == "Coach")
                     {
                         await _roleManager.CreateAsync(new ApplicationRole("Coach", "This is a Coach", DateTime.Now));
                         await _userManager.AddToRoleAsync(user, "Coach");
+
+                        var coach = new Coach { Biography = "no added", Dob = DateTime.Now, Name =Input.Name, Nickname = Input.Nickname };
+                        _context.Add(coach);
+                        await _context.SaveChangesAsync();
+                    }
+                    else
+                    {
+                        var member = new Member {Dob = DateTime.Now, Name=Input.Name };
+                        _context.Add(member);
+                        await _context.SaveChangesAsync();
                     }
 
                     _logger.LogInformation("User created a new account with password.");

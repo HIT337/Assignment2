@@ -5,13 +5,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Assignment2.Models;
+
 using assignment2.Data;
 using Microsoft.AspNetCore.Authorization;
+using assignment2.Models;
+using System.Data.SqlClient;
 
 namespace assignment2.Controllers
 {
-    [Authorize(Roles = "Admin,User")]
+    [Authorize(Roles = "Admin,Member")]
     public class MembersController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,9 +24,26 @@ namespace assignment2.Controllers
         }
 
         // GET: Members
-        public async Task<IActionResult> Index()
+        public ActionResult Index()
         {
-            return View(await _context.Member.ToListAsync());
+            var model = new List<Member>();
+            using (var conn = new SqlConnection("Server=(localdb)\\mssqllocaldb;Database=aspnet-assignment2-485EE39A-E10C-4C1F-9A04-386AE7FE1725;Trusted_Connection=True;MultipleActiveResultSets=true"))
+            {
+                String sql = "SELECT * FROM dbo.Coach";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                conn.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    var obj = new Member();
+                    obj.Name = rdr["Name"].ToString();
+                    obj.Dob = DateTime.Now;
+                    model.Add(obj);
+                }
+            }
+
+            return View(model);
         }
 
         // GET: Members/Details/5

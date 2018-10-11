@@ -21,7 +21,7 @@ namespace assignment2.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Assignment2.Models.Coach", b =>
+            modelBuilder.Entity("assignment2.Models.Coach", b =>
                 {
                     b.Property<int>("CoachId")
                         .ValueGeneratedOnAdd()
@@ -40,7 +40,7 @@ namespace assignment2.Data.Migrations
                     b.ToTable("Coach");
                 });
 
-            modelBuilder.Entity("Assignment2.Models.Event", b =>
+            modelBuilder.Entity("assignment2.Models.Event", b =>
                 {
                     b.Property<int>("EventId")
                         .ValueGeneratedOnAdd()
@@ -59,7 +59,7 @@ namespace assignment2.Data.Migrations
                     b.ToTable("Event");
                 });
 
-            modelBuilder.Entity("Assignment2.Models.Member", b =>
+            modelBuilder.Entity("assignment2.Models.Member", b =>
                 {
                     b.Property<int>("MemberId")
                         .ValueGeneratedOnAdd()
@@ -76,7 +76,7 @@ namespace assignment2.Data.Migrations
                     b.ToTable("Member");
                 });
 
-            modelBuilder.Entity("Assignment2.Models.Schedule", b =>
+            modelBuilder.Entity("assignment2.Models.Schedule", b =>
                 {
                     b.Property<int>("ScheduleId")
                         .ValueGeneratedOnAdd()

@@ -12,9 +12,10 @@ namespace assignment2.Data
             public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
                 : base(options) { }
 
-            public DbSet<Assignment2.Models.Coach> Coach { get; set; }
-        public DbSet<Assignment2.Models.Event> Event { get; set; }
-        public DbSet<Assignment2.Models.Member> Member { get; set; }
-        public DbSet<Assignment2.Models.Schedule> Schedule { get; set; }
+            public DbSet<assignment2.Models.Coach> Coach { get; set; }
+        public DbSet<assignment2.Models.Event> Event { get; set; }
+        public DbSet<assignment2.Models.Member> Member { get; set; }
+        public DbSet<assignment2.Models.Schedule> Schedule { get; set; }
     }
+
 }

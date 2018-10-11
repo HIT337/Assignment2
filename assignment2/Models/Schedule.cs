@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Assignment2.Models
+namespace assignment2.Models
 {
     public partial class Schedule
     {

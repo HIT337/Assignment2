@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Assignment2.Models;
 using assignment2.Data;
 using Microsoft.AspNetCore.Authorization;
+using assignment2.Models;
 
 namespace assignment2.Controllers
 {
