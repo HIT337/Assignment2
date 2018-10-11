@@ -8,10 +8,6 @@ namespace assignment2.Models
 {
     public partial class tennisContext : DbContext
     {
-        public tennisContext()
-        {
-        }
-
         public tennisContext(DbContextOptions<tennisContext> options)
             : base(options)
         {

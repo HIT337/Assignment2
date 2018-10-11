@@ -97,22 +97,23 @@ namespace assignment2.Areas.Identity.Pages.Account
                     if (Input.UserRole == "Member")
                     {
 
-                        await _roleManager.CreateAsync(new ApplicationRole("Member", "This is a User", DateTime.Now));
+                        await _roleManager.CreateAsync(new ApplicationRole("Member", "This is a Member", DateTime.Now));
                         await _userManager.AddToRoleAsync(user, "Member");
+
+                        //adding data to the member database
+                        var member = new Member { Dob = DateTime.Now, Name = Input.Name };
+                        _context.Add(member);
+                        await _context.SaveChangesAsync();
+
                     }
                     else if (Input.UserRole == "Coach")
                     {
                         await _roleManager.CreateAsync(new ApplicationRole("Coach", "This is a Coach", DateTime.Now));
                         await _userManager.AddToRoleAsync(user, "Coach");
 
-                        var coach = new Coach { Biography = "no added", Dob = DateTime.Now, Name =Input.Name, Nickname = Input.Nickname };
+                        //adding data to the coach database
+                        var coach = new Coach { Biography = "not added", Dob = DateTime.Now, Name =Input.Name, Nickname = Input.Nickname };
                         _context.Add(coach);
-                        await _context.SaveChangesAsync();
-                    }
-                    else
-                    {
-                        var member = new Member {Dob = DateTime.Now, Name=Input.Name };
-                        _context.Add(member);
                         await _context.SaveChangesAsync();
                     }
 
