@@ -8,7 +8,7 @@ namespace assignment2.Models
         public int EventId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public int? Coach { get; set; }
+        public int Coach { get; set; }
         public DateTime Date { get; set; }
     }
 }
