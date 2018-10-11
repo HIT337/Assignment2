@@ -57,6 +57,11 @@ namespace assignment2.Areas.Identity.Pages.Account
             public string Nickname { get; set; }
 
             [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Gender")]
+            public string Gender { get; set; }
+
+            [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
