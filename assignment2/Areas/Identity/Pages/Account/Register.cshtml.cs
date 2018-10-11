@@ -111,7 +111,7 @@ namespace assignment2.Areas.Identity.Pages.Account
                         await _userManager.AddToRoleAsync(user, "Member");
 
                         //adding data to the member database
-                        var member = new Member { Dob = Input.Dob, Name = Input.Name };
+                        var member = new Member { Dob = Input.Dob, Name = Input.Name, Gender = Input.Gender };
                         _context.Add(member);
                         await _context.SaveChangesAsync();
 

@@ -39,6 +39,7 @@ namespace assignment2.Controllers
                     var obj = new Member();
                     obj.Name = rdr["Name"].ToString();
                     obj.Dob = (DateTime)rdr["Dob"];
+                    obj.Gender = rdr["Gender"].ToString();
                     model.Add(obj);
                 }
             }
