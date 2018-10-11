@@ -29,7 +29,7 @@ namespace assignment2.Controllers
             var model = new List<Member>();
             using (var conn = new SqlConnection("Server=(localdb)\\mssqllocaldb;Database=aspnet-assignment2-485EE39A-E10C-4C1F-9A04-386AE7FE1725;Trusted_Connection=True;MultipleActiveResultSets=true"))
             {
-                String sql = "SELECT * FROM dbo.Coach";
+                String sql = "SELECT * FROM dbo.Member";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 conn.Open();
                 SqlDataReader rdr = cmd.ExecuteReader();
