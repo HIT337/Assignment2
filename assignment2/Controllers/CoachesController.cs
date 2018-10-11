@@ -42,7 +42,7 @@ namespace assignment2.Controllers
                     obj.Name = rdr["Name"].ToString();
                     obj.Biography = rdr["Biography"].ToString();
                     obj.CoachId = (int)rdr["CoachId"];
-                    obj.Dob = DateTime.Now;
+                    obj.Dob = (DateTime)rdr["Dob"];
                     obj.Nickname= rdr["Nickname"].ToString();
                     model.Add(obj);
                 }

@@ -38,7 +38,7 @@ namespace assignment2.Controllers
                 {
                     var obj = new Member();
                     obj.Name = rdr["Name"].ToString();
-                    obj.Dob = DateTime.Now;
+                    obj.Dob = (DateTime)rdr["Dob"];
                     model.Add(obj);
                 }
             }
