@@ -62,6 +62,11 @@ namespace assignment2.Areas.Identity.Pages.Account
             public string Email { get; set; }
 
             [Required]
+            [Display(Name = "Birthdate")]
+            [DataType(DataType.Date)]
+            public DateTime Dob { get; set; }
+
+            [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
@@ -101,7 +106,7 @@ namespace assignment2.Areas.Identity.Pages.Account
                         await _userManager.AddToRoleAsync(user, "Member");
 
                         //adding data to the member database
-                        var member = new Member { Dob = DateTime.Now, Name = Input.Name };
+                        var member = new Member { Dob = Input.Dob, Name = Input.Name };
                         _context.Add(member);
                         await _context.SaveChangesAsync();
 
