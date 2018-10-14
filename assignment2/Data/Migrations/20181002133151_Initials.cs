@@ -17,8 +17,9 @@ namespace assignment2.Data.Migrations
                     Name = table.Column<string>(nullable: true),
                     Nickname = table.Column<string>(nullable: true),
                     Dob = table.Column<DateTime>(nullable: false),
-                    Biography = table.Column<string>(nullable: true)
-                },
+                    Biography = table.Column<string>(nullable: true),
+					UserId = table.Column<string>(nullable: false)
+				},
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Coach", x => x.CoachId);
@@ -32,7 +33,7 @@ namespace assignment2.Data.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
-                    Coach = table.Column<int>(nullable: true),
+                    CoachId = table.Column<int>(nullable: true),
                     Date = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
@@ -48,7 +49,8 @@ namespace assignment2.Data.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
                     Dob = table.Column<DateTime>(nullable: false),
-                    Gender = table.Column<string>(nullable: true)
+                    Gender = table.Column<string>(nullable: true),
+					UserId = table.Column<string>(nullable:false)
                 },
                 constraints: table =>
                 {

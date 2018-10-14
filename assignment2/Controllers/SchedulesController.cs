@@ -21,29 +21,14 @@ namespace assignment2.Controllers
             _context = context;
         }
 
-		// GET: Schedules
-		public ActionResult Index()
-		{
-			if (User.IsInRole("Coach"))
-			{
-				var Schedules = _context.Schedule/*.Include(c => c.AllocatedCoach)*/
-				;
-				//.Where(i. => ;
-				var sql = Schedules.ToString();
-				return View(Schedules.ToList());
-			}
-			else
-			{
-				var Schedules = _context.Schedule/*.Include(c => c.AllocatedCoach)*/
-				;
-				//.Where(i. => ;
-				var sql = Schedules.ToString();
-				return View(Schedules.ToList());
-			}
-		}
+        // GET: Schedules
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.Schedule.ToListAsync());
+        }
 
-		// GET: Schedules/Details/5
-		public async Task<IActionResult> Details(int? id)
+        // GET: Schedules/Details/5
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
