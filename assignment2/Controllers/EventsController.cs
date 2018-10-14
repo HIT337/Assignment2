@@ -29,7 +29,7 @@ namespace assignment2.Controllers
 		{
 			if (User.IsInRole("Coach"))
 			{
-				var Events = _context.Event.Include(c => c.AllocatedCoach)
+				var Events = _context.Event.Include(c => c.AllocatedCoach)/**/
 				.OrderBy(s => s.Date).ToList();
 				//.Where(i. => ;
 				var sql = Events.ToString();
@@ -37,7 +37,7 @@ namespace assignment2.Controllers
 			}
 			else
 			{
-				var Events = _context.Event.Include(c => c.AllocatedCoach)
+				var Events = _context.Event.Include(c => c.AllocatedCoach)/**/
 				.OrderBy(s => s.Date).ToList();
 				var sql = Events.ToString();
 				return View(Events.ToList());
@@ -80,7 +80,7 @@ namespace assignment2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EventId,Name,Description,Coach,Date")] Event @event)
+        public async Task<IActionResult> Create([Bind("EventId,Name,Description,CoachId,Date")] Event @event)
         {
             if (ModelState.IsValid)
             {

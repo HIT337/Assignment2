@@ -10,8 +10,8 @@ using assignment2.Data;
 namespace assignment2.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181014073833_DyllanFix1")]
-    partial class DyllanFix1
+    [Migration("20181014102619_DyllanFix")]
+    partial class DyllanFix
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -126,6 +126,8 @@ namespace assignment2.Data.Migrations
 
                     b.Property<string>("Nickname");
 
+                    b.Property<string>("UserId");
+
                     b.HasKey("CoachId");
 
                     b.ToTable("Coach");
@@ -147,8 +149,6 @@ namespace assignment2.Data.Migrations
 
                     b.HasKey("EventId");
 
-                    b.HasIndex("CoachId");
-
                     b.ToTable("Event");
                 });
 
@@ -163,6 +163,8 @@ namespace assignment2.Data.Migrations
                     b.Property<string>("Gender");
 
                     b.Property<string>("Name");
+
+                    b.Property<string>("UserId");
 
                     b.HasKey("MemberId");
 
@@ -272,14 +274,6 @@ namespace assignment2.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("assignment2.Models.Event", b =>
-                {
-                    b.HasOne("assignment2.Models.Coach", "AllocatedCoach")
-                        .WithMany()
-                        .HasForeignKey("CoachId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

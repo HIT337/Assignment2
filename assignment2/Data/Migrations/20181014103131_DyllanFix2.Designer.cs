@@ -10,7 +10,7 @@ using assignment2.Data;
 namespace assignment2.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181014093014_DyllanFix2")]
+    [Migration("20181014103131_DyllanFix2")]
     partial class DyllanFix2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -149,8 +149,6 @@ namespace assignment2.Data.Migrations
 
                     b.HasKey("EventId");
 
-                    b.HasIndex("CoachId");
-
                     b.ToTable("Event");
                 });
 
@@ -184,10 +182,6 @@ namespace assignment2.Data.Migrations
                     b.Property<int>("MemberId");
 
                     b.HasKey("ScheduleId");
-
-                    b.HasIndex("EventId");
-
-                    b.HasIndex("MemberId");
 
                     b.ToTable("Schedule");
                 });
@@ -280,27 +274,6 @@ namespace assignment2.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("assignment2.Models.Event", b =>
-                {
-                    b.HasOne("assignment2.Models.Coach", "AllocatedCoach")
-                        .WithMany()
-                        .HasForeignKey("CoachId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("assignment2.Models.Schedule", b =>
-                {
-                    b.HasOne("assignment2.Models.Event", "AllocatedEvent")
-                        .WithMany()
-                        .HasForeignKey("EventId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("assignment2.Models.Member", "AllocatedMember")
-                        .WithMany()
-                        .HasForeignKey("MemberId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
