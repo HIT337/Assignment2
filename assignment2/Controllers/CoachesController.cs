@@ -14,7 +14,7 @@ using System.Data.SqlClient;
 namespace assignment2.Controllers
 {
     [Authorize(Roles = "Admin,Coach,Member")]
-    public class CoachesController : Controller
+	public class CoachesController : Controller
     {
 
         private ApplicationDbContext _context;
@@ -77,7 +77,7 @@ namespace assignment2.Controllers
         //}
 
         // GET: Coaches/Edit/5
-        [Authorize(Roles = "Admin,Coach")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -98,7 +98,7 @@ namespace assignment2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin,Coach")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, [Bind("CoachId,Name,Nickname,Dob,Biography")] Coach coach)
         {
             if (id != coach.CoachId)
@@ -130,7 +130,7 @@ namespace assignment2.Controllers
         }
 
         // GET: Coaches/Delete/5
-        [Authorize(Roles = "Admin,Coach")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -151,7 +151,7 @@ namespace assignment2.Controllers
         // POST: Coaches/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin,Coach")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var coach = await _context.Coach.FindAsync(id);

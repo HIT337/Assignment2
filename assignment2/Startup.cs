@@ -76,7 +76,7 @@ namespace assignment2
                 routes.MapRoute(
                     name: "default",
 
-                    template: "{controller=Schedules}/{action=Index}/{id?}");
+                    template: "{controller=Events}/{action=Index}/{id?}");
             });
 
             DummyData.Initialize(context, userManager, roleManager).Wait();// seed here

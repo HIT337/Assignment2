@@ -13,7 +13,7 @@ using System.Data.SqlClient;
 namespace assignment2.Controllers
 
 {
-    [Authorize(Roles = "Admin,Member")]
+    [Authorize(Roles = "Admin,Member,Coach")]
 	public class EventsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -28,6 +28,7 @@ namespace assignment2.Controllers
 		// GET: Events
 		public ActionResult Index()
 		{
+			//unimplemented sorting by only that coach
 			if (User.IsInRole("Coach"))
 			{
 				var Events = _context.Event.Include(c => c.AllocatedCoach)/**/
@@ -44,10 +45,12 @@ namespace assignment2.Controllers
 				return View(Events.ToList());
 			}
 		}
+		[Authorize(Roles = "Member")]
 		public ActionResult Enrol(int id)
 		{
 			return View("index");
 		}
+		[Authorize(Roles = "Admin,Member")]
 		public ActionResult CoachDetails(int? Id)
 		{
 			return RedirectToAction("Details", "Coaches", new { id = Id });
@@ -70,8 +73,9 @@ namespace assignment2.Controllers
             return View(@event);
         }
 
-        // GET: Events/Create
-        public IActionResult Create()
+		// GET: Events/Create
+		[Authorize(Roles = "Admin")]
+		public IActionResult Create()
         {
 			IEnumerable<SelectListItem> items = _context.Coach.Select(c => new SelectListItem
 			{
@@ -89,7 +93,8 @@ namespace assignment2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EventId,Name,Description,CoachId,Date")] Event @event)
+		[Authorize(Roles = "Admin")]
+		public async Task<IActionResult> Create([Bind("EventId,Name,Description,CoachId,Date")] Event @event)
         {
             if (ModelState.IsValid)
             {
@@ -129,7 +134,8 @@ namespace assignment2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EventId,Name,Description,CoachId,Date")] Event @event)
+		[Authorize(Roles = "Admin")]
+		public async Task<IActionResult> Edit(int id, [Bind("EventId,Name,Description,CoachId,Date")] Event @event)
         {
             if (id != @event.EventId)
             {
@@ -159,8 +165,9 @@ namespace assignment2.Controllers
             return View(@event);
         }
 
-        // GET: Events/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+		// GET: Events/Delete/5
+		[Authorize(Roles = "Admin")]
+		public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -180,7 +187,8 @@ namespace assignment2.Controllers
         // POST: Events/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+		[Authorize(Roles = "Admin")]
+		public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var @event = await _context.Event.FindAsync(id);
             _context.Event.Remove(@event);

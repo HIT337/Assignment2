@@ -62,7 +62,12 @@
 					else if (User.IsInRole("Member"))
 					{
 						<a asp-action="Enrol" asp-route-id="@item.EventId">Enrol</a> <span>|</span>
+						<a asp-action="Details" asp-route-id="@item.EventId">Event Details</a> <span>|</span>
 						<a asp-action="CoachDetails" asp-route-id="@item.AllocatedCoach.CoachId">Coach Details</a>@**@
+					}
+					else if (User.IsInRole("Coach"))
+					{
+						<a asp-action="Details" asp-route-id="@item.EventId">Event Details</a>
 					}
 				}
 			</td>

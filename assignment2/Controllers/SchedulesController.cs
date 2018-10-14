@@ -11,7 +11,7 @@ using assignment2.Models;
 
 namespace assignment2.Controllers
 {
-    [Authorize(Roles = "Admin,Member,Coach")]
+    [Authorize(Roles = "Admin")]
     public class SchedulesController : Controller
     {
         private readonly ApplicationDbContext _context;
