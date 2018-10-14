@@ -43,9 +43,13 @@ namespace assignment2.Controllers
 				return View(Events.ToList());
 			}
 		}
-		public ActionResult Enrol()
+		public ActionResult Enrol(int id)
 		{
 			return View("index");
+		}
+		public ActionResult CoachDetails(int? Id)
+		{
+			return RedirectToAction("Details", "Coaches", new { id = Id });
 		}
 		// GET: Events/Details/5
 		public async Task<IActionResult> Details(int? id)

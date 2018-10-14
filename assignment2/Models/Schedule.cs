@@ -9,6 +9,7 @@ namespace assignment2.Models
         public int EventId { get; set; }
         public int MemberId { get; set; }
 
-
-    }
+		public virtual Member AllocatedMember { get; set; }
+		public virtual Event AllocatedEvent { get; set; }
+	}
 }

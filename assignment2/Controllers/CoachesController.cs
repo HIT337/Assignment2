@@ -28,27 +28,10 @@ namespace assignment2.Controllers
         // GET: Coaches
         public ActionResult Index()
         {
-            var model = new List<Coach>();
-            using (var conn = new SqlConnection("Server=(localdb)\\mssqllocaldb;Database=aspnet-assignment2-485EE39A-E10C-4C1F-9A04-386AE7FE1725;Trusted_Connection=True;MultipleActiveResultSets=true"))
-            {
-                String sql = "SELECT * FROM dbo.Coach";
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                conn.Open();
-                SqlDataReader rdr = cmd.ExecuteReader();
-
-                while (rdr.Read())
-                {
-                    var obj = new Coach();
-                    obj.Name = rdr["Name"].ToString();
-                    obj.Biography = rdr["Biography"].ToString();
-                    obj.CoachId = (int)rdr["CoachId"];
-                    obj.Dob = (DateTime)rdr["Dob"];
-                    obj.Nickname= rdr["Nickname"].ToString();
-                    model.Add(obj);
-                }
-            }
-
-            return View(model);
+			var Coachs = _context.Coach.ToList();
+			var sql = Coachs.ToString();
+			return View(Coachs.ToList());
+			
         }
 
         // GET: Coaches/Details/5
