@@ -122,7 +122,7 @@ namespace assignment2.Areas.Identity.Pages.Account
                         await _userManager.AddToRoleAsync(user, "Coach");
 
                         //adding data to the coach database
-                        var coach = new Coach { Biography = "not added", Dob = DateTime.Now, Name =Input.Name, Nickname = Input.Nickname };
+                        var coach = new Coach { Biography = "not added", Dob = Input.Dob, Name =Input.Name, Nickname = Input.Nickname };
                         _context.Add(coach);
                         await _context.SaveChangesAsync();
                     }
