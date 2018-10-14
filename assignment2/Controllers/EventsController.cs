@@ -11,6 +11,7 @@ using assignment2.Models;
 using System.Data.SqlClient;
 
 namespace assignment2.Controllers
+
 {
     [Authorize(Roles = "Admin,Member")]
 	public class EventsController : Controller
@@ -72,7 +73,15 @@ namespace assignment2.Controllers
         // GET: Events/Create
         public IActionResult Create()
         {
-            return View();
+			IEnumerable<SelectListItem> items = _context.Coach.Select(c => new SelectListItem
+			{
+				
+				Value = c.CoachId.ToString(),
+				Text = c.Name
+
+			});
+			ViewBag.CoachName = items;
+			return View();
         }
 
         // POST: Events/Create
@@ -112,7 +121,7 @@ namespace assignment2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EventId,Name,Description,Coach,Date")] Event @event)
+        public async Task<IActionResult> Edit(int id, [Bind("EventId,Name,Description,CoachId,Date")] Event @event)
         {
             if (id != @event.EventId)
             {
