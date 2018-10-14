@@ -10,5 +10,6 @@ namespace assignment2.Models
         public string Nickname { get; set; }
         public DateTime Dob { get; set; }
         public string Biography { get; set; }
-    }
+		public String UserId { get; set; }
+	}
 }

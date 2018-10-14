@@ -8,5 +8,7 @@ namespace assignment2.Models
         public int ScheduleId { get; set; }
         public int EventId { get; set; }
         public int MemberId { get; set; }
+
+
     }
 }

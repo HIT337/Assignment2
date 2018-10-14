@@ -5,10 +5,6 @@
 }
 
 <h2>Coach List</h2>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -53,7 +49,7 @@
 					}
 					else if (User.IsInRole("Member"))
 					{
-						<a asp-action="Enrol" asp-route-id="@item.CoachId">Details</a>
+						<a asp-action="Details" asp-route-id="@item.CoachId">Details</a>
 					}
 				}
 			</td>

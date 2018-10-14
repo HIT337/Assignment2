@@ -104,28 +104,7 @@ namespace assignment2.Areas.Identity.Pages.Account
                 {
                     await _userManager.AddPasswordAsync(user, Input.Password);
 
-                    if (Input.UserRole == "Member")
-                    {
-
-                        await _roleManager.CreateAsync(new ApplicationRole("Member", "This is a Member", DateTime.Now));
-                        await _userManager.AddToRoleAsync(user, "Member");
-
-                        //adding data to the member database
-                        var member = new Member { Dob = Input.Dob, Name = Input.Name, Gender = Input.Gender };
-                        _context.Add(member);
-                        await _context.SaveChangesAsync();
-
-                    }
-                    else if (Input.UserRole == "Coach")
-                    {
-                        await _roleManager.CreateAsync(new ApplicationRole("Coach", "This is a Coach", DateTime.Now));
-                        await _userManager.AddToRoleAsync(user, "Coach");
-
-                        //adding data to the coach database
-                        var coach = new Coach { Biography = "not added", Dob = Input.Dob, Name =Input.Name, Nickname = Input.Nickname };
-                        _context.Add(coach);
-                        await _context.SaveChangesAsync();
-                    }
+                    
 
                     _logger.LogInformation("User created a new account with password.");
 
@@ -140,7 +119,36 @@ namespace assignment2.Areas.Identity.Pages.Account
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return LocalRedirect(returnUrl);
+
+					if (Input.UserRole == "Member")
+					{
+
+						await _roleManager.CreateAsync(new ApplicationRole("Member", "This is a Member", DateTime.Now));
+						await _userManager.AddToRoleAsync(user, "Member");
+
+						//adding data to the member database
+						var member = new Member { Dob = Input.Dob, Name = Input.Name, Gender = Input.Gender, UserId = user.Id };
+						_context.Add(member);
+						await _context.SaveChangesAsync();
+
+					}
+					else if (Input.UserRole == "Coach")
+					{
+						await _roleManager.CreateAsync(new ApplicationRole("Coach", "This is a Coach", DateTime.Now));
+						await _userManager.AddToRoleAsync(user, "Coach");
+
+						//adding data to the coach database
+						var coach = new Coach { Biography = "not added", Dob = Input.Dob, Name = Input.Name, Nickname = Input.Nickname, UserId = user.Id };
+						_context.Add(coach);
+						await _context.SaveChangesAsync();
+					}
+
+
+
+
+
+
+					return LocalRedirect(returnUrl);
                 }
                 foreach (var error in result.Errors)
                 {

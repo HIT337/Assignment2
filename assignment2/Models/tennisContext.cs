@@ -63,7 +63,7 @@ namespace assignment2.Models
 
                 entity.Property(e => e.EventId).HasColumnName("event_id");
 
-                entity.Property(e => e.Coach).HasColumnName("coach");
+                entity.Property(e => e.CoachId).HasColumnName("coach");
 
                 entity.Property(e => e.Date)
                     .HasColumnName("date")
