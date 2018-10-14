@@ -11,14 +11,16 @@ using assignment2.Models;
 
 namespace assignment2.Controllers
 {
-    [Authorize(Roles = "Admin")]
-    public class EventsController : Controller
+    [Authorize(Roles = "Admin,Member")]
+	public class EventsController : Controller
     {
         private readonly ApplicationDbContext _context;
+		/*private readonly Coach _coach;*/
 
-        public EventsController(ApplicationDbContext context)
+        public EventsController(ApplicationDbContext context/*,Coach coach*/)
         {
             _context = context;
+			//_coach = coach;
         }
 
         // GET: Events
