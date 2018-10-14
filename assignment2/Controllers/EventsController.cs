@@ -113,6 +113,14 @@ namespace assignment2.Controllers
             {
                 return NotFound();
             }
+			IEnumerable<SelectListItem> items = _context.Coach.Select(c => new SelectListItem
+			{
+
+				Value = c.CoachId.ToString(),
+				Text = c.Name
+
+			});
+			ViewBag.CoachName = items;
             return View(@event);
         }
 
