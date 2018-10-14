@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using assignment2.Data;
 using Microsoft.AspNetCore.Authorization;
 using assignment2.Models;
+using System.Data.SqlClient;
 
 namespace assignment2.Controllers
 {
@@ -23,14 +24,39 @@ namespace assignment2.Controllers
 			//_coach = coach;
         }
 
-        // GET: Events
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Event.ToListAsync());
-        }
+		// GET: Events
+		public ActionResult Index()
+		{
+			var events = _context.Event.Include(c => c.Coach);
+			return View(events);
+		}
+		//	var model = new List<Event>();
+		//	using (var conn = new SqlConnection("Server=(localdb)\\mssqllocaldb;Database=aspnet-assignment2-485EE39A-E10C-4C1F-9A04-386AE7FE1725;Trusted_Connection=True;MultipleActiveResultSets=true"))
+		//	{
+		//		String sql = "SELECT * FROM dbo.Event";
+		//		SqlCommand cmd = new SqlCommand(sql, conn);
+		//		conn.Open();
+		//		SqlDataReader rdr = cmd.ExecuteReader();
 
-        // GET: Events/Details/5
-        public async Task<IActionResult> Details(int? id)
+		//		if (User.IsInRole("Admin")) { }
+		//			while (rdr.Read())
+		//		{
+		//			var obj = new Event();
+		//			obj.EventId = (int)rdr["EventId"];
+		//			obj.Name = rdr["Name"].ToString();
+		//			obj.Description = rdr["Description"].ToString();
+		//			obj.Coach = (int)rdr["Coach"];
+		//			obj.Date = (DateTime)rdr["Date"];
+
+		//			model.Add(obj);
+		//		}
+		//	}
+
+		//	return View(model);
+		//}
+
+		// GET: Events/Details/5
+		public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
