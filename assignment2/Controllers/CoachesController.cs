@@ -69,29 +69,29 @@ namespace assignment2.Controllers
             return View(coach);
         }
 
-        // GET: Coaches/Create
-        [Authorize(Roles = "Admin,Coach")]
-        public IActionResult Create()
-        {
-            return View();
-        }
+        //// GET: Coaches/Create
+        //[Authorize(Roles = "Admin,Coach")]
+        //public IActionResult Create()
+        //{
+        //    return View();
+        //}
 
-        // POST: Coaches/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin,Coach")]
-        public async Task<IActionResult> Create([Bind("CoachId,Name,Nickname,Dob,Biography")] Coach coach)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(coach);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(coach);
-        }
+        //// POST: Coaches/Create
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //[Authorize(Roles = "Admin,Coach")]
+        //public async Task<IActionResult> Create([Bind("CoachId,Name,Nickname,Dob,Biography")] Coach coach)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _context.Add(coach);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(coach);
+        //}
 
         // GET: Coaches/Edit/5
         [Authorize(Roles = "Admin,Coach")]

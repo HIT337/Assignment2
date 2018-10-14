@@ -7,8 +7,15 @@
 <h2>Events</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
-</p>
+	@if (User.Identity.IsAuthenticated)
+	{
+		if (User.IsInRole("Admin"))
+		{
+			<a asp-action="Create">Create New</a>
+		}
+	}
+			
+		</p>
 <table class="table">
     <thead>
         <tr>
@@ -29,25 +36,35 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Coach)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.EventId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.EventId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.EventId">Delete</a>
-            </td>
-        </tr>
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.Name)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Description)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Coach)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Date)
+			</td>
+			<td>
+				@if (User.Identity.IsAuthenticated)
+				{
+					if (User.IsInRole("Admin"))
+					{
+						<a asp-action="Edit" asp-route-id="@item.EventId">Edit</a> <span>|</span>
+						<a asp-action="Details" asp-route-id="@item.EventId">Details</a> <span>|</span>
+						<a asp-action="Delete" asp-route-id="@item.EventId">Delete</a>
+					}
+					else if (User.IsInRole("Member"))
+					{
+						<a asp-action="Enrol" asp-route-id="@item.EventId">Enrol</a>
+					}
+				}
+			</td>
+		</tr>
 }
     </tbody>
 </table>

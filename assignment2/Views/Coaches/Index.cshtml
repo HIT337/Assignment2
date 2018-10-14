@@ -4,11 +4,15 @@
     ViewData["Title"] = "Coach List";
 }
 
+<<<<<<< HEAD
 <h2>Coach List</h2>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+=======
+<h2>Index</h2>
+>>>>>>> DyllanBranch
 <table class="table">
     <thead>
         <tr>
@@ -42,11 +46,21 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Biography)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.CoachId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CoachId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CoachId">Delete</a>
-            </td>
+			<td>
+				@if (User.Identity.IsAuthenticated)
+				{
+					if (User.IsInRole("Admin"))
+					{
+						<a asp-action="Edit" asp-route-id="@item.CoachId">Edit</a> <span>|</span>
+						<a asp-action="Details" asp-route-id="@item.CoachId">Details</a> <span>|</span>
+						<a asp-action="Delete" asp-route-id="@item.CoachId">Delete</a>
+					}
+					else if (User.IsInRole("Member"))
+					{
+						<a asp-action="Enrol" asp-route-id="@item.CoachId">Details</a>
+					}
+				}
+			</td>
         </tr>
 }
     </tbody>

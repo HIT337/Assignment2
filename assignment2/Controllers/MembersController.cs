@@ -65,27 +65,27 @@ namespace assignment2.Controllers
             return View(member);
         }
 
-        // GET: Members/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
+        //// GET: Members/Create
+        //public IActionResult Create()
+        //{
+        //    return View();
+        //}
 
-        // POST: Members/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MemberId,Name,Dob,Gender")] Member member)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(member);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(member);
-        }
+        //// POST: Members/Create
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create([Bind("MemberId,Name,Dob,Gender")] Member member)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _context.Add(member);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(member);
+        //}
 
         // GET: Members/Edit/5
         public async Task<IActionResult> Edit(int? id)

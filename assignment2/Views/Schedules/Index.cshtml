@@ -4,11 +4,22 @@
     ViewData["Title"] = "Schedule";
 }
 
+<<<<<<< HEAD
 <h2>Schedule</h2>
+=======
+<h2>Your Schedule</h2>
+>>>>>>> DyllanBranch
 
 <p>
-    <a asp-action="Create">Create New</a>
-</p>
+	@if (User.Identity.IsAuthenticated)
+	{
+		if (User.IsInRole("Admin"))
+		{
+	<a asp-action="Create">Create New</a>
+		}
+	}
+		
+	</p>
 <table class="table">
     <thead>
         <tr>

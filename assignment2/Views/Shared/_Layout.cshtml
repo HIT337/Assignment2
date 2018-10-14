@@ -28,34 +28,32 @@
                 </button>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+				<ul class="nav navbar-nav">
 
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        if (User.IsInRole("Admin"))
-                        {
-                            <li><a asp-area="" asp-controller="Events" asp-action="Index">Events</a></li>
-                            <li><a asp-area="" asp-controller="Coaches" asp-action="Index">Coaches</a></li>
-                            <li><a asp-area="" asp-controller="Members" asp-action="Index">Members</a></li>
-                            <li><a asp-area="" asp-controller="Schedules" asp-action="Index">Schedules</a></li>
-                        }
+					@if (User.Identity.IsAuthenticated)
+					{
+						if (User.IsInRole("Admin"))
+						{
+							<li><a asp-area="" asp-controller="Events" asp-action="Index">Events</a></li>
+							<li><a asp-area="" asp-controller="Coaches" asp-action="Index">Coaches</a></li>
+							<li><a asp-area="" asp-controller="Members" asp-action="Index">Members</a></li>
+							<li><a asp-area="" asp-controller="Schedules" asp-action="Index">Schedules</a></li>
+						}
 
-                        else if (User.IsInRole("Member"))
-                        {
-                            <li><a asp-area="" asp-controller="Schedules" asp-action="Index">Schedules</a></li>
-                            <li><a asp-area="" asp-controller="Coaches" asp-action="Index">Coaches</a></li>
-                            <li><a asp-area="" asp-controller="Members" asp-action="Index">Members</a></li>
-                        }
+						else if (User.IsInRole("Member"))
+						{
+							<li><a asp-area="" asp-controller="Schedules" asp-action="Index">Your Schedule</a></li>
+							<li><a asp-area="" asp-controller="Events" asp-action="Index">Events</a></li>
+							<li><a asp-area="" asp-controller="Coaches" asp-action="Index">Coaches</a></li>
+						}
 
-                        else if (User.IsInRole("Coach"))
-                        {
-                            <li><a asp-area="" asp-controller="Schedules" asp-action="Index">Schedules</a></li>
-                            <li><a asp-area="" asp-controller="Coaches" asp-action="Index">Coaches</a></li>
-                        }
+						else if (User.IsInRole("Coach"))
+						{
+							<li><a asp-area="" asp-controller="Schedules" asp-action="Index">Your Schedule</a></li>
+						}
+					}
 
-                    }
-
-                </ul>
+				</ul>
                 <partial name="_LoginPartial" />
             </div>
         </div>
